@@ -22,8 +22,6 @@ builder.Services.AddMassTransit(configurator =>
   {
     rabbitMq.Host(new Uri(builder.Configuration.GetConnectionString("RabbitMq")!));
 
-    rabbitMq.DeployPublishTopology = false;
-    
     rabbitMq.ConfigureEndpoints(context);
   });
   
