@@ -6,7 +6,9 @@
       "applicationUrl": "http://localhost:4000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_ConnectionStrings__RabbitMq": "amqp://guest:guest@localhost:5672/"
+        "ASPNETCORE_ConnectionStrings__RabbitMq": "amqp://guest:guest@localhost:5672/",
+        "OTEL_SERVICE_NAME": "ExchangeToExchangeBinding",
+        "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4317"
       }
     }
   }

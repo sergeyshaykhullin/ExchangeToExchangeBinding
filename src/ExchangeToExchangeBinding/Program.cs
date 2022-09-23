@@ -1,5 +1,6 @@
 using ExchangeToExchangeBinding.Core;
 using MassTransit;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,17 @@ builder.Services.AddOptions<MassTransitHostOptions>()
   {
     options.WaitUntilStarted = true;
   });
+
+builder.Services.AddOpenTelemetryTracing(tracing =>
+{
+  tracing.AddSource("MassTransit")
+    .AddOtlpExporter()
+    .AddAspNetCoreInstrumentation(options =>
+    {
+      options.RecordException = true;
+    })
+    .AddMassTransitInstrumentation();
+});
 
 var app = builder.Build();
 
