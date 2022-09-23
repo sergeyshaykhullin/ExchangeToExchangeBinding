@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "ExchangeToExchangeBinding": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:4000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_ConnectionStrings__RabbitMq": "amqp://guest:guest@localhost:5672/"
+      }
+    }
+  }
+}
