@@ -29,7 +29,7 @@ app.MapGet("/publish", async (IPublishEndpoint publishEndpoint) =>
 
   await publishEndpoint.Publish(new Step1Created { Id = id });
 
-  return TypedResults.Ok(id);
+  return Results.Ok(id);
 });
 
 app.Run();

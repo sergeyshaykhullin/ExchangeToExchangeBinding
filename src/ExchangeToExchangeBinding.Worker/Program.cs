@@ -8,13 +8,6 @@ builder.Services.AddMassTransit(configurator =>
 {
   configurator.SetKebabCaseEndpointNameFormatter();
 
-  configurator.UsingRabbitMq((context, rabbitMq) =>
-  {
-    rabbitMq.Host(new Uri(builder.Configuration.GetConnectionString("RabbitMq")!));
-
-    rabbitMq.ConfigureEndpoints(context);
-  });
-
   configurator.AddConsumer<Step1Consumer, DurableQuorumConsumerDefinition<Step1Consumer>>()
     .Endpoint(x => x.Name = "queue:step1");
 
@@ -23,6 +16,16 @@ builder.Services.AddMassTransit(configurator =>
 
   configurator.AddConsumer<Step3Consumer, DurableQuorumConsumerDefinition<Step3Consumer>>()
     .Endpoint(x => x.Name = "queue:step3");
+  
+  configurator.UsingRabbitMq((context, rabbitMq) =>
+  {
+    rabbitMq.Host(new Uri(builder.Configuration.GetConnectionString("RabbitMq")!));
+
+    rabbitMq.DeployPublishTopology = false;
+    
+    rabbitMq.ConfigureEndpoints(context);
+  });
+  
 });
 
 builder.Services.AddOptions<MassTransitHostOptions>()
