@@ -9,13 +9,13 @@ builder.Services.AddMassTransit(configurator =>
   configurator.SetKebabCaseEndpointNameFormatter();
 
   configurator.AddConsumer<Step1Consumer, DurableQuorumConsumerDefinition<Step1Consumer>>()
-    .Endpoint(x => x.Name = "queue:step1");
+    .Endpoint(x => x.Name = "queuestep1");
 
   configurator.AddConsumer<Step2Consumer, DurableQuorumConsumerDefinition<Step2Consumer>>()
-    .Endpoint(x => x.Name = "queue:step2");
+    .Endpoint(x => x.Name = "queuestep2");
 
   configurator.AddConsumer<Step3Consumer, DurableQuorumConsumerDefinition<Step3Consumer>>()
-    .Endpoint(x => x.Name = "queue:step3");
+    .Endpoint(x => x.Name = "queuestep3");
   
   configurator.UsingRabbitMq((context, rabbitMq) =>
   {
